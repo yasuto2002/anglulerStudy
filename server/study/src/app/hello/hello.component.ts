@@ -1,42 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 
+interface Test {
+  'border-style':string | undefined
+  'border-width':string | undefined
+  'border-color':string | undefined
+}
+
 @Component({
   selector: 'app-hello',
   templateUrl: './hello.component.html',
-  styleUrls: ['./hello.component.scss']
+  styleUrls: ['./hello.component.scss'],
 })
 export class HelloComponent implements OnInit {
 
-  title:string
-  message:string
-  price:number
-  now:Date
-  styleClass:string
-  name:string
+  public title:string
+  public message:string
+  public nowStyle:Test
 
-  constructor() { 
+  public constructor() { 
     this.title = ""
     this.message = ""
-    this.price = 0
-    this.now = new Date()
-    this.styleClass = 'red'
-    this.name = ''
-
-    setInterval(()=>{
-      this.now = new Date()
-    },1000)
-
-
+    this.nowStyle = {
+      'border-style':'',
+      'border-width':'',
+      'border-color':''
+    }
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.title = "Hello App"
     this.message = "This is My Print Component"
-    this.price = 100
   }
 
-  today () :string {
+  public today () :string {
     return new Date().toLocaleString()
+  }
+
+  public check(c1:string,c2:string,c3:string) :void{
+    this.nowStyle['border-style'] = c1
+    this.nowStyle['border-width'] = c2
+    this.nowStyle['border-color'] = c3
+    this.message = `${String(c1)},${String(c2)},${String(c3)}`
   }
 
 }
